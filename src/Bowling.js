@@ -6,27 +6,32 @@ function Bowling() {
 Bowling.prototype.gameFrame = function() {
   if (this.ballOne() === 0){
     this.message = "Strike, frame is over";
+  } else if (this.ballTwo() === 0){
+    this.message = "Spare, frame is over";
   } else {
     this.message ="Frame continues";
-  }
+  };
   return this.message;
 };
 
 Bowling.prototype.ballOne = function() {
   var pinsDown = this.pinsKnocked(this.startPins);
   if (pinsDown === 10){
-  var pinsLeft = 0;
+  this.pinsLeft = 0;
   } else{
-    pinsLeft = this.startPins - pinsDown;
+    this.pinsLeft = this.startPins - pinsDown;
   };
-  return pinsLeft;
+  return this.pinsLeft;
 };
 
 Bowling.prototype.ballTwo = function() {
-  // var pinsDown = this.pinsKnocked(this.startPins);
-  // if (pinsDown === 10){
-  //   return "Strike";
-  // };
+  var pinsDown = this.pinsKnocked(this.pinsLeft);
+  var totalPinsDown = this.pinsLeft + pinsDown;
+  console.log(totalPinsDown);
+  if (totalPinsDown === 10){
+     this.pinsLeft = 0;
+  };
+  return this.pinsLeft;
   // this.ballTwo();
 };
 

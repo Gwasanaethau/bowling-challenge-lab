@@ -34,7 +34,7 @@ describe('Bowling', function() {
       describe('and number of pins down is less than 10', function(){
 
         it('the frames continues', function(){
-          spyOn(bowling, 'pinsKnocked').and.returnValue(6);
+          spyOn(bowling, 'ballOne').and.returnValue(6);
           expect(bowling.gameFrame()).toEqual("Frame continues");
         });
 
@@ -50,6 +50,12 @@ describe('Bowling', function() {
         spyOn(bowling, 'ballOne').and.returnValue(6);
         pinsLeft = 10 - bowling.ballOne();
         expect(bowling.pinsKnocked(pinsLeft)).toBeLessThan(5);
+      });
+
+      it('and number of pins knocked down plus number of pins knocked by ball 1, is 10', function() {
+        spyOn(bowling, 'ballOne').and.returnValue(6);
+        spyOn(bowling, 'ballTwo').and.returnValue(0);
+        expect(bowling.gameFrame()).toEqual("Spare, frame is over");
       });
     });
   });
